@@ -1,0 +1,3 @@
+143a144,145
+>     void reset() { _reset(); }  // ray: add public reset function
+> 

@@ -34,7 +34,6 @@
 OSBeeWiFi osb;
 ProgramData pd;
 ESP8266WebServer *server = NULL;
-BlynkWifi Blynk(_blynkTransport);
 SSD1306& disp = OSBeeWiFi::display;
 
 static uint16_t led_blink_ms = LED_FAST_BLINK;
@@ -810,7 +809,7 @@ void start_program(byte pid) {
   schedule_run_program();
 }
 
-void do_setup()
+void setup()
 {
   DEBUG_BEGIN(115200);
   if(server) {
@@ -1020,7 +1019,7 @@ void time_keeping() {
   }
 }
 
-void do_loop() {
+void loop() {
   static ulong connecting_timeout;
   
   switch(osb.state) {
@@ -1081,7 +1080,7 @@ void do_loop() {
       server->begin();
 
       if(curr_cloud_access_en) {
-        Blynk.begin(osb.options[OPTION_AUTH].sval.c_str());
+        Blynk.config(osb.options[OPTION_AUTH].sval.c_str());
         Blynk.connect();
       }
       osb.state = OSB_STATE_CONNECTED;      

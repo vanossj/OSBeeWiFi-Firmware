@@ -226,7 +226,7 @@ byte ProgramStruct::check_match(time_t t) {
   int16_t start = starttimes[0];
   int16_t repeat = starttimes[1];
   int16_t interval = starttimes[2];
-  uint current_minute = (t%86400L)/60;
+  int current_minute = (t%86400L)/60;
 
   // first assume program starts today
   if (check_day_match(t)) {

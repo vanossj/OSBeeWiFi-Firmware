@@ -8,45 +8,17 @@ Updates:
 =======
 * (Dec 5) Release OSBeeWiFi firmware 1.0.0
 
-
 Preparation:
 ===========
-
-* Install makeEspArduino (Method 1 below), or Arduino 1.6.x with ESP8266 core (Method 2 below)
-* Blynk library for Arduino (https://github.com/blynkkk/blynk-library)
-* SSD1306 library (https://github.com/squix78/esp8266-oled-ssd1306)
+* Install [PlatformIO](https://platformio.org/)
 * This (OSBeeWiFi) library
-
 
 Compilation:
 ===========
 
-#### Method 1: use makeEspArduino
-
-If you are familiar with Makefile, I highly recommend you to use makeEspArduino:
-
-https://github.com/plerup/makeEspArduino
-
-Follow the instructions to install,and run get.py to get ESP8266 core files. Then copy the Blynk, SSD1306, and OSBeeWiFi libraries to the 'libraries' subfolder in your local esp8266 directory. The OSBeeWiFi library has an example Makefile which you can modify to match your specific path.
-
-You also need to modify two files in the ESP8266 core and Blynk library. See README.txt in the Modifications folder for details. Then simply run 'make' in the OSBeeWiFi folder to compile the programs. The compiled firmware (named mainArduino.cpp.bin) by default exists in a temporary folder.
-
-#### Method 2: use Arduino IDE
-
-Go to http://arduino.cc to download and install the Arduino software. Then follow the instructions at:
-
-https://github.com/esp8266/Arduino
-
-to install the ESP8266 core for Arduino. Next, copy the Blynk, SSD1306, and OSBeeWiFi libraries to your Arduino's 'libraries' subfolder. You also need to modify two files in the ESP8266 core and Blynk library. See README.txt in the Modifications folder for details.
-
-To compile, launch Arduino, select:
-
-* File -> Examples -> OSBeeWiFi -> mainArduino.
-* Tools -> Board -> Generic ESP8266 Module (if this is not available, check if you've installed the ESP8266 core).
-* Tools -> Flash Size -> 4M (1M SPIFFS).
-
-Press Ctrl + R to compile. The compiled firmware (named mainArduino.cpp.bin) by default exists in a temporary folder.
-
+1. Use PlatformIO to open the platformio.ini project file.
+2. Follow Modifications/README.m to modify the necessary ESP8266 core library file.
+3. Build the project using ```platformio run``` (or corresponding IDE build command). Output will be ```firmware.bin``` file. Check build text for location.
 
 Upload Firmware:
 =========
@@ -65,14 +37,6 @@ If OTA updates fails, you can still upload the firmware through USB instead. To 
   - Press and hold the pushbutton on OSBeeWiFi while plugging in the USB cable
   - Release the pushbutton (the LED should stay on)
   The LCD screen should remain off. If the LCD screen lights up, it has failed to enter bootloading mode. Just repeated the procedure. Every time you upload a new firmware through USB, you need to let it enter bootloading mode first.
-
-* If you have compiled the firmware using the makeEspArduino method, you can use the Makefile to upload firmware. First, check the USB serial port name:
-  - Mac OSX: the port name is typically /dev/tty.wchusbserial####. You can run 'ls /dev/tty.wch*' to find out.
-  - Linux: the port name is typically /dev/ttyUSB#. You can run 'ls /dev/ttyUSB*' to find out.
-Next, modify the Makefile to change the serial port name to match yours. Then run 'make upload' in the OSBeeWiFi folder. 
-
-* If you have compiled In Arduino, press Ctrl + U to start uploading.
-
 
 Firmware Features:
 =================
